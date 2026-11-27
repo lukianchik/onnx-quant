@@ -1,0 +1,25 @@
+model,seed,eligible,validated,eligible_parameters,quantized_parameters,fp32_initializer_parameters,quantized_share,calibration_seconds,provider,note
+autoencoder,123,2,1,2048,1024,2128,0.48120300751879697,0.08213128399984271,cuda,"Digits; независимые train/calibration/dev/test. PCA-автоэнкодер, обученный на train."
+autoencoder,42,2,2,2048,2048,2128,0.9624060150375939,0.07209873400006472,cuda,"Digits; независимые train/calibration/dev/test. PCA-автоэнкодер, обученный на train."
+autoencoder,731,2,2,2048,2048,2128,0.9624060150375939,0.067974272000356,cuda,"Digits; независимые train/calibration/dev/test. PCA-автоэнкодер, обученный на train."
+efficientnet_b0,123,82,82,5236192,5236192,5267540,0.9940488349400289,580.7556796179997,cuda,"ImageNet checkpoint, CIFAR-10 images; only FP32 fidelity and prediction agreement, not CIFAR accuracy."
+efficientnet_b0,42,82,82,5236192,5236192,5267540,0.9940488349400289,535.668549058,cuda,"ImageNet checkpoint, CIFAR-10 images; only FP32 fidelity and prediction agreement, not CIFAR accuracy."
+efficientnet_b0,731,82,82,5236192,5236192,5267540,0.9940488349400289,564.8684857340004,cuda,"ImageNet checkpoint, CIFAR-10 images; only FP32 fidelity and prediction agreement, not CIFAR accuracy."
+lstm_head,123,1,1,320,320,5706,0.05608131791097091,0.10461605999989843,cuda,"Digits trained LSTM; fused LSTM operator is unsupported, only supported output weights quantized."
+lstm_head,42,1,1,320,320,5706,0.05608131791097091,0.08859306999966066,cuda,"Digits trained LSTM; fused LSTM operator is unsupported, only supported output weights quantized."
+lstm_head,731,1,1,320,320,5706,0.05608131791097091,0.08830596799998602,cuda,"Digits trained LSTM; fused LSTM operator is unsupported, only supported output weights quantized."
+minilm_embeddings,123,36,36,10616832,10616832,22565376,0.4704921380437002,32.78673384600006,cuda,Normalized mean-pooled MiniLM embeddings on AG News; no task accuracy claimed.
+minilm_embeddings,42,36,36,10616832,10616832,22565376,0.4704921380437002,29.98427665300005,cuda,Normalized mean-pooled MiniLM embeddings on AG News; no task accuracy claimed.
+minilm_embeddings,731,36,36,10616832,10616832,22565376,0.4704921380437002,31.22947816800024,cuda,Normalized mean-pooled MiniLM embeddings on AG News; no task accuracy claimed.
+mlp,123,2,2,2368,2368,2410,0.9825726141078838,0.09191784399990865,cuda,Digits; независимые train/calibration/dev/test.
+mlp,42,2,2,2368,2368,2410,0.9825726141078838,0.06503142700012177,cuda,Digits; независимые train/calibration/dev/test.
+mlp,731,2,2,2368,2368,2410,0.9825726141078838,0.08556879899970227,cuda,Digits; независимые train/calibration/dev/test.
+multi_output,123,3,3,3312,3312,3410,0.9712609970674487,0.12487638799939305,cuda,Digits; независимые train/calibration/dev/test. Две головы: классификация и реконструкция; V2 пропускается.
+multi_output,42,3,3,3312,3312,3410,0.9712609970674487,0.10483035200013546,cuda,Digits; независимые train/calibration/dev/test. Две головы: классификация и реконструкция; V2 пропускается.
+multi_output,731,3,3,3312,3312,3410,0.9712609970674487,0.08232739499999298,cuda,Digits; независимые train/calibration/dev/test. Две головы: классификация и реконструкция; V2 пропускается.
+regression,123,2,2,352,352,385,0.9142857142857143,0.06273832599981688,cuda,"Diabetes; фиксированные случайные признаки, обученный ridge-выход."
+regression,42,2,2,352,352,385,0.9142857142857143,0.07939714199983428,cuda,"Diabetes; фиксированные случайные признаки, обученный ridge-выход."
+regression,731,2,2,352,352,385,0.9142857142857143,0.06434700400041038,cuda,"Diabetes; фиксированные случайные признаки, обученный ridge-выход."
+vit_tiny,123,50,50,5647872,5647872,5717416,0.987836463185467,21.621756287000608,cuda,"ImageNet checkpoint, CIFAR-10 images; only FP32 fidelity and prediction agreement, not CIFAR accuracy."
+vit_tiny,42,50,50,5647872,5647872,5717416,0.987836463185467,21.442991097000004,cuda,"ImageNet checkpoint, CIFAR-10 images; only FP32 fidelity and prediction agreement, not CIFAR accuracy."
+vit_tiny,731,50,50,5647872,5647872,5717416,0.987836463185467,23.16059046400005,cuda,"ImageNet checkpoint, CIFAR-10 images; only FP32 fidelity and prediction agreement, not CIFAR accuracy."

@@ -1,0 +1,22 @@
+services:
+  quantlab:
+    build: .
+    container_name: onnx-quant-lab
+    init: true
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:7860:7860"
+    volumes:
+      - ./data:/app/data
+      # The FP32 BERT-Tiny and SST-2 data are already baked into the image.
+    environment:
+      QUANTLAB_DATA: /app/data
+      QUANTLAB_EXAMPLES: /app/examples
+    cpus: 4.0
+    mem_limit: 6g
+    pids_limit: 256
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

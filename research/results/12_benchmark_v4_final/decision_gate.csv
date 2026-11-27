@@ -1,0 +1,9 @@
+method,complete,passes_engineering_gate,models_improved,mean_model_median_worst_test,sum_model_median_prepare_s
+Astra-Adaptive,True,True,6,0.6277000321298247,711.2899655639983
+FullBank-Robust,True,True,6,0.5446485308059501,1357.2061982669907
+Paired-Robust,True,True,5,0.6283272259403044,383.01053005998256
+Progressive,True,True,6,0.5444261953198232,496.34596129700185
+Progressive-Global,True,True,8,0.5010512076088275,829.0889691860011
+SDR-Robust,True,True,6,0.5569974628539078,752.501647606998
+Single-Dev,True,False,7,0.5074987036923388,250.45705919399597
+Single-Robust,True,True,5,0.643458153529292,250.11796026299635

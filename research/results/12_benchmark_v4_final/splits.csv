@@ -1,0 +1,25 @@
+model,seed,fit,local_dev,global_search,global_check,test,note
+regression,42,58,15,7,8,89,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+regression,731,58,15,7,8,89,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+regression,123,58,15,7,8,89,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+mlp,42,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+mlp,731,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+mlp,123,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+minilm_embeddings,42,128,48,24,24,512,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+minilm_embeddings,731,128,48,24,24,512,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+minilm_embeddings,123,128,48,24,24,512,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+autoencoder,42,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+autoencoder,731,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+autoencoder,123,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+efficientnet_b0,42,128,48,24,24,512,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+efficientnet_b0,731,128,48,24,24,512,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+efficientnet_b0,123,128,48,24,24,512,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+multi_output,42,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+multi_output,731,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+multi_output,123,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+vit_tiny,42,128,48,24,24,512,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+vit_tiny,731,128,48,24,24,512,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+vit_tiny,123,128,48,24,24,512,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+lstm_head,42,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+lstm_head,731,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.
+lstm_head,123,128,48,24,24,360,Original dev split by position; all selectors frozen before test metrics are used. No test values used in selection.

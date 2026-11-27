@@ -1,0 +1,73 @@
+/* Оболочка и обычные компоненты Gradio; сводки HTML имеют отдельный scope. */
+:root, .gradio-container {
+  --ql-canvas: var(--body-background-fill, #f7f8fa);
+  --ql-panel: var(--background-fill-primary, #fff);
+  --ql-inset: var(--background-fill-secondary, #f0f2f5);
+  --ql-line: var(--border-color-primary, #dce0e6);
+  --ql-text: var(--body-text-color, #20232a);
+  --ql-muted: var(--body-text-color-subdued, #656d7b);
+  --ql-accent: var(--color-accent, #396ad7);
+  --ql-tint: var(--color-accent-soft, #e8efff);
+}
+html, body, gradio-app { background: var(--body-background-fill, #101114) !important; }
+.gradio-container {
+  background: var(--ql-canvas) !important;
+  width: 100% !important; max-width: none !important;
+  min-height: 100vh; margin: 0 !important;
+  padding: 0 !important;
+  color: var(--ql-text);
+}
+.gradio-container > .main { width: 100%; max-width: none !important; box-sizing: border-box; }
+.gradio-container .quantlab-app {
+  width: 100%; max-width: 1600px; margin-inline: auto;
+  padding: 24px clamp(16px, 3.5vw, 56px) 48px;
+  gap: 20px; box-sizing: border-box;
+}
+.gradio-container .ql-tabs { border: 0; background: transparent; gap: 16px; }
+.gradio-container .ql-tabs [role="tablist"] {
+  display: flex; gap: 24px; padding: 0;
+  border: 0; border-bottom: 1px solid var(--ql-line);
+  border-radius: 0; background: transparent;
+  overflow-x: auto; scrollbar-width: thin;
+}
+.gradio-container .ql-tabs [role="tab"] {
+  flex: none; white-space: nowrap;
+  padding: 11px 4px 12px !important; border: 0 !important;
+  border-bottom: 2px solid transparent !important; border-radius: 0 !important;
+  color: var(--ql-muted); font-weight: 550; font-size: 14px;
+  background: transparent !important;
+}
+.gradio-container .ql-tabs [role="tab"][aria-selected="true"] {
+  color: var(--ql-text) !important;
+  border-bottom-color: var(--ql-accent) !important;
+}
+.gradio-container .ql-tabs [role="tabpanel"] { border: 0; padding: 0; background: transparent; }
+.gradio-container .ql-panel {
+  align-self: stretch; min-width: min(100%, 290px) !important;
+  padding: 20px; gap: 16px;
+  background: var(--ql-panel); border: 1px solid var(--ql-line); border-radius: 9px;
+}
+.gradio-container .ql-panel-heading h3 {
+  margin: 0; font-size: 15px; font-weight: 650; letter-spacing: -.015em; color: var(--ql-text);
+}
+.gradio-container .ql-action {
+  min-height: 40px; border-radius: 6px; font-size: 14px; font-weight: 600;
+}
+.gradio-container .ql-action:disabled { opacity: .5; cursor: not-allowed; }
+.gradio-container .ql-hint p { color: var(--ql-muted); font-size: 13px; line-height: 1.55; }
+.gradio-container .ql-demo-info { padding: 12px; background: var(--ql-inset); border-radius: 6px; }
+.gradio-container .ql-details {
+  background: var(--ql-panel); border: 1px solid var(--ql-line); border-radius: 8px;
+}
+.gradio-container .ql-details > button { padding: 12px 16px; font-size: 13px; color: var(--ql-text); }
+.gradio-container .ql-upload { min-height: 0 !important; }
+.gradio-container .ql-upload .upload-container { min-height: 106px !important; }
+.gradio-container .ql-upload .file-preview { min-height: 0 !important; }
+.gradio-container .ql-download { min-width: min(100%, 200px) !important; }
+.gradio-container :focus-visible { outline: 2px solid var(--ql-accent); outline-offset: 2px; }
+@media (max-width: 700px) {
+  .gradio-container .quantlab-app { padding: 16px 12px 32px; gap: 14px; }
+  .gradio-container .ql-panel { flex-basis: 100% !important; padding: 14px; }
+  .gradio-container .ql-tabs [role="tablist"] { gap: 15px; flex-wrap: nowrap; }
+  .gradio-container .ql-tabs [role="tab"] { font-size: 12px; }
+}

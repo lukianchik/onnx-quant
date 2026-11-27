@@ -1,0 +1,7 @@
+# Linux x86_64, Python 3.13, CPU-only runtime
+onnx==1.23.2
+onnxruntime==1.32.0
+numpy>=2.2,<3.0
+transformers>=5.0,<6.0
+gradio>=6.0,<7.0
+pytest>=8,<10

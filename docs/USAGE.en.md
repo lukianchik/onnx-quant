@@ -1,0 +1,65 @@
+# User guide
+
+[Русский](USAGE.md) · [README](../README.en.md)
+
+## Installation and development
+
+Requires Docker and Docker Compose (Docker Desktop with Linux containers on Windows). From the repository root:
+
+```sh
+docker compose up -d --build quantlab
+docker compose exec -T quantlab python -m pytest -q -p no:cacheprovider tests
+```
+
+Open [127.0.0.1:7860](http://127.0.0.1:7860). The first build downloads dependencies, BERT-Tiny and SST-2 from upstream and may take considerable time. Model weights and datasets are not committed. On Linux the host `data` directory must be writable by the container UID/GID (1000:1000 by default).
+
+For development using an existing image:
+
+```sh
+docker compose -f compose.yaml -f compose.dev.yaml up -d --no-build quantlab
+docker compose -f compose.yaml -f compose.dev.yaml restart quantlab
+```
+
+Source files are mounted from the host; demo assets remain in the image. Rebuild when dependencies or the base image change.
+
+## Choose a mode
+
+| Mode | Input needed | Behavior |
+| --- | --- | --- |
+| Standard · MinMax | Optional JSON to measure output error | Quantizes weights per output channel |
+| Fast · Single-Robust | At least 5 batches | Tests one local alternative per layer |
+| Balanced · Progressive | At least 5 batches | Tests alternatives in sequence until the gain target or work limit |
+| Quality · Progressive-Global | At least 6 batches | Also checks combinations of alternatives on a separate split |
+
+All four modes store INT8 weights, use FP32 scales with `DequantizeLinear`, and append `Cast` to FP16 for original FP16 weights. They require a standard opset of 13 or later and support MatMul/Gemm with constant FP32/FP16 matrix weights and 1D–3D Conv, including grouped convolutions. Weights shared by multiple operators or exposed as graph inputs/outputs are skipped. Adaptive modes also validate local activations. Search uses FP32 arithmetic, and final quality is checked on the actual exported graph. FP16 requires CPU ONNX Runtime support for the original operators. Legacy JSON keys `fp32`/`FP32` and `fp32_size_mib` denote the reference model for compatibility; `source_dtype` identifies the weight type and coverage counts both FP32 and FP16 initializers. If no numeric output improves on held-out batches, or any numeric output gets worse, the exported model uses MinMax on the same validated layers.
+
+## From model to report
+
+1. In **Модель** (Model), choose a source and click **Проанализировать** (Analyze). Graph details include input names, types and shapes.
+2. In **Квантование** (Quantization), select a mode. For uploads, supply calibration as a JSON array such as `[{"input": [[1.0, 2.0, 3.0]]}]`. Each record is one model invocation. The demo includes 256 calibration texts from SST-2 train, tokenized in batches of 16. Download the ONNX model and its JSON report.
+3. Use **Проверка** (Inference) for one input or **Датасет** (Dataset) to compare both models on a dataset. The demo defaults to 872 labeled SST-2 validation texts and also accepts CSV with `text,label` columns, JSON, or JSONL. For uploaded models, use records such as `{"inputs":{"input":[[1,2,3]]},"label":1}` with one example per batch. Wrap the records in an array for JSON.
+
+Evaluation accepts up to 8 MiB and 2,000 examples. Supply labels for every example or omit them all. Labeled classification reports include accuracy, macro F1 and a confusion matrix. For more than 256 classes, the report stores its nonzero cells. Latency is measured over a single pass.
+
+Each run stores its own model and reports under `data/runs/`. The demo preparation script is `scripts/prepare_demo.py`. Research materials are available under [research/](../research/README.md).
+
+## Code layout
+
+- `app.py` — Docker entry point; `quantlab/ui/` — workspace, event handlers and HTML summaries.
+- `quantlab/core.py`, `engine.py`, `runtime.py`, `inference.py`, `evaluation.py` — ONNX application services, execution and evaluation.
+- `quantlab/weight_only/` — algorithms, graph adapters and search policies.
+- `assets/theme.css` — Gradio shell; `assets/components.css` — scoped HTML summaries.
+
+## Continuous integration
+
+[GitHub Actions](https://github.com/lukianchik/onnx-quant/actions/workflows/ci.yml) runs tests on Linux with Python 3.13, including synthetic ONNX models. The bundled BERT-Tiny test is skipped without demo assets; use Docker to exercise it.
+
+## Limitations
+
+- Self-contained ONNX files up to 256 MiB; external weight files are unsupported.
+- CPU execution; the search budget estimates computational work rather than enforcing hard time or memory limits.
+- The application is not a sandbox for untrusted models. See [security](../SECURITY.md).
+
+### Synthetic FP16 demo
+
+In an environment with `numpy` and `onnx`, run `python scripts/prepare_fp16_demo.py`. The `test-models/fp16-demo/` directory contains an ONNX model, calibration, a single input and an independent evaluation set. Labels are generated by the reference linear classifier; accuracy measures fidelity to its decisions, not real-world task quality.

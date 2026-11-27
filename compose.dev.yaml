@@ -1,0 +1,11 @@
+# Использовать вместе с compose.yaml; не пересобирать зависимости при правках кода.
+services:
+  quantlab:
+    volumes:
+      - ./app.py:/app/app.py:ro
+      - ./quantlab:/app/quantlab:ro
+      - ./assets:/app/assets:ro
+      - ./tests:/app/tests:ro
+    environment:
+      PYTHONDONTWRITEBYTECODE: '1'
+      HF_HUB_OFFLINE: '1'
